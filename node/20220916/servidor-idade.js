@@ -22,6 +22,7 @@ app.get('/', function (req, res) {
 });
 app.post('/idade', urlencodedParser,
     function (req, res) {
+        try {
         fs.readFile('idade-res.html',
             function (erro, dado) {
                 var hoje = new Date();
@@ -31,7 +32,10 @@ app.post('/idade', urlencodedParser,
                     'idade': (hoje.getFullYear() -
                         parseInt(req.body.anonasc))
                 };
+                console.log(hoje);
+                console.log(valores);
                 for (var chave in valores) {
+                    console.log(chave);
                     dado = dado.toString().replace("{{" +
                         chave + "}}", valores[chave]);
                 }
@@ -39,4 +43,7 @@ app.post('/idade', urlencodedParser,
                 res.write(dado);
                 res.end();
             });
+        } catch (error) {
+            console.log(error);
+        }
     });
