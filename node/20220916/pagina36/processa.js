@@ -33,17 +33,20 @@ app.get('/', function (req, res) {
 
 app.post('/calcula', urlencodedParser, //requisicao que sera gerada
     function (req, res) {
-        fs.readFile('resposta.html',
-            function (erro, dado) {
-                var valores = {
-                    'totalVenda': (req.body.precoUnit * req.body.qtd)-((req.body.precoUnit * req.body.qtd) * req.body.desconto) }
-                dado = dado.toString().replace("{{" +
-                        chave + "}}", valores[chave]);
-        
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.write(dado);
-                res.end();
-    
-            });
-        })
-            
+        try {
+            fs.readFile('resposta.html',
+                function (erro, dado) {
+                    console.log(dado);
+                    total = parseInt(req.body.precoUnit) * parseInt(req.body.qtd);
+                    totalVenda = total - (total * (parseInt(req.body.desconto)/100));
+                    dado = dado.toString().replace("{{totalVenda}}", totalVenda);
+
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.write(dado);
+                    res.end();
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
