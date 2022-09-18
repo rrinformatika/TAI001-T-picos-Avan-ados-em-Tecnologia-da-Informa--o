@@ -1,0 +1,8 @@
+// CRIANDO UMA VARIAVEL E DEFININDO SEU VALOR
+var nome = "Reginaldo Rossi"
+// EXIBINDO NA TELA UMA MENSAGEM CONCATENADA COM A VARIAVEL
+console.log('Boa noite!' + nome);
+
+
+
+

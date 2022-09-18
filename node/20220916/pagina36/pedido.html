@@ -1,0 +1,41 @@
+<!-- 2) Desenvolver uma aplicação web em Node.js para
+uma determinada loja que precisa calcular o Total de 
+venda de um produto. O cálculo deverá ser efetuado 
+através da multiplicação do preço unitário pela 
+quantidade vendida e, posteriormente, subtrair o 
+valor do desconto. Considerar todas as variáveis do 
+tipo de dado real, que serão digitadas pelo usuário
+através de um formulário HTML. -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>TRABALHO NUMERO 2 PAGINA 36</h1>
+        </div>
+        <form id="form" method="POST" action="/calcula">
+            <div class="form-group">
+                Preço do Produto: <input type="text" name="precoUnit" class="form-control" />
+            </div>
+            <div class="form-group">
+                Quantidade: <input type="text" name="qtd" class="form-control" />
+            </div>
+            <div class="form-group">
+                Desconto: <input type="text" name="desconto" class="form-control" />
+            </div>
+            <input type="submit" value="Calcular" class="btn btn-primary" />
+        </form>
+    </div>
+</body>
+
+</html>
