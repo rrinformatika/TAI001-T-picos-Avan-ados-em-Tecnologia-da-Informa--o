@@ -46,7 +46,7 @@ app.get('/', function (req, res) {
             res.end();
         });
 });
-const apolice = (valor, idade, sexo, anoFabr) => {
+/* const apolice = (valor, idade, sexo, anoFabr) => {
     if (anoFabr > 2009){
         apolice=valor+(valor*1.25);
         if (sexo = "f") {apolice = apolice -(apolice*10)
@@ -60,35 +60,40 @@ const apolice = (valor, idade, sexo, anoFabr) => {
 
     }
     return parseFloat(totalApolice)
-  }
-  
+  } */
+
 app.post('/calcula', urlencodedParser,
     function (req, res) {
         try {
             fs.readFile('resultado.html',
                 function (erro, dado) {
                     var hoje = new Date();
+                    var idade = (hoje.getFullYear() -
+                        parseInt(req.body.anoNasc));
+                    var taxaIdade1 = 0.0125;
+                    var taxaIdade2 = 0.0175;
+                    var taxaIdade3 = 0.0200;
+                    var taxaIdade4 = 0.0250;
+                    var sexo = req.body.sexo;
+
+                    var valorVeic = req.body.valorVeic,
+                    if (idade > 30 || idade < 60) {
+                        var apolice = (req.body.valorVeic + (req.body.valorVeic * 2.5))
+
+                    }
                     var valores = {
                         'nome': req.body.nome,
                         'sexo': req.body.sexo,
                         'anoNasc': req.body.anoNasc,
-                        'idade': (hoje.getFullYear() -
-                            parseInt(req.body.anoNasc)),
+                        'idade': idade,
                         'anoFabr': req.body.anoFabr,
                         'valorVeic': req.body.valorVeic,
                         'porcBonus': req.body.porcBonus,
-                        'apolice': apolice('valorVeic', 'idade', 'sexo', 'anoFabr')     
+                        'apolice': apolice = ('anoFabr' + ('anoFabr' * 0.2))
                     };
-
-                    if ('anoFabr' > 2009) {
-                        var apolice = 'valorVeic'+('valorVeic' * 1,25)
-                        console.log("Ano maior de 2009")
-                    }
-                    /*                    
-                                       var apolice = anoFabr*2;
-                                       console.log(hoje);
-                                       console.log(valores); */
-
+                    /*                     if ('idade' > 30) {
+                                            console.log("Voce tem mais de 30 anos")
+                                        } */
                     for (var chave in valores) {
                         console.log(chave);
                         dado = dado.toString().replace("{{" +
