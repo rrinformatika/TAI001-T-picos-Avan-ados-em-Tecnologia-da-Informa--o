@@ -70,39 +70,59 @@ app.post('/calcula', urlencodedParser,
                     var hoje = new Date();
                     var idade = (hoje.getFullYear() -
                         parseInt(req.body.anoNasc));
-                    var taxaIdade1 = 0.0125;
-                    var taxaIdade2 = 0.0175;
-                    var taxaIdade3 = 0.0200;
-                    var taxaIdade4 = 0.0250;
+                    var acima2010 = 0.0125;
+                    var ate2009 = 0.0175;
+                    var ate1999 = 0.0200;
+                    var abaixo1979 = 0.0250;
                     var sexo = req.body.sexo;
+                    var valorVeic = (parseInt(req.body.valorVeic));
+                    var anoFabr = req.body.anoFabr;
+                    var porcBonus = (parseInt(req.body.porcBonus));
 
-                    var valorVeic = req.body.valorVeic,
-                    if (idade > 30 || idade < 60) {
-                        var apolice = (req.body.valorVeic + (req.body.valorVeic * 2.5))
-
-                    }
-                    var valores = {
-                        'nome': req.body.nome,
-                        'sexo': req.body.sexo,
-                        'anoNasc': req.body.anoNasc,
-                        'idade': idade,
-                        'anoFabr': req.body.anoFabr,
-                        'valorVeic': req.body.valorVeic,
-                        'porcBonus': req.body.porcBonus,
-                        'apolice': apolice = ('anoFabr' + ('anoFabr' * 0.2))
-                    };
-                    /*                     if ('idade' > 30) {
-                                            console.log("Voce tem mais de 30 anos")
-                                        } */
-                    for (var chave in valores) {
-                        console.log(chave);
-                        dado = dado.toString().replace("{{" +
-                            chave + "}}", valores[chave]);
-                    }
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.write(dado);
-                    res.end();
-                });
+                    if (anoFabr < 1980) {
+                        var apolice = (valorVeic * abaixo1979)
+                        console.log(apolice)
+                    } else if (anoFabr < 2000) {
+                            var apolice = (valorVeic * ate1999)
+                        } else if (anoFabr < 2010) {
+                                var apolice = (valorVeic * ate2009)
+                            } else {
+                                var apolice = (valorVeic * acima2010)
+                            }
+                            if (sexo == "M") {
+                                apolice += apolice * 0.05
+                                console.log(apolice)
+                            }
+                            if (sexo == "F") {
+                                apolice -= apolice * 0.10
+                                console.log(apolice)
+                            }
+                            if (idade < 30 || idade > 60) {
+                                apolice += apolice * 0.20
+                                console.log(apolice)
+                            }
+                            apolice -= (apolice * (porcBonus / 100))
+                            console.log(porcBonus)
+                            console.log(apolice)
+                            var valores = {
+                                'nome': req.body.nome,
+                                'sexo': req.body.sexo,
+                                'anoNasc': req.body.anoNasc,
+                                'idade': idade,
+                                'anoFabr': anoFabr,
+                                'valorVeic': valorVeic,
+                                'porcBonus': porcBonus,
+                                'apolice': apolice,
+                            };
+                            for (var chave in valores) {
+                                console.log(chave);
+                                dado = dado.toString().replace("{{" +
+                                    chave + "}}", valores[chave]);
+                            }
+                            res.writeHead(200, { 'Content-Type': 'text/html' });
+                            res.write(dado);
+                            res.end();
+                        });
         } catch (error) {
             console.log(error);
         }
