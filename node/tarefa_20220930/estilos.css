@@ -1,0 +1,33 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    display: block;
+}
+h1{
+    text-align: center;
+    margin-block: 5px;
+}
+.header{
+    background-color: bisque;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: blue;
+    text-align: center;
+    margin: 15px;
+    margin-bottom: 15px;
+    height: 40px;
+    
+}
+.meu_form{
+    background-color: tomato;
+    width: 30%;
+    display: inline;
+    padding-bottom: 10px 10px 10px 10px;
+    margin-left: 10px;
+}
+input{
+    width: 30%;
+height: 30px;
+}
+.caixa_perguntas{
+    padding-left: 2%;
+}
