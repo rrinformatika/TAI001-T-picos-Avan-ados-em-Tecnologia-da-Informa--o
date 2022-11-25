@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,24 +12,22 @@ tstrap/4.3.1/css/bootstrap.min.css">
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1>Novo produto</h1>
+            <h1>Editar produto</h1>
         </div>
-        <form id="form" method="POST" action="/incluir-produto">
+        <form id="form" method="POST" action="/alterar-produto">
             <div class="form-group">
                 Código:
-                <input type="text" name="codigo" class="form-control" maxlength="3" />
+                <input type="text" name="codigo" class="form-control" maxlength="3" value="{{codigo}}" readonly />
             </div>
             <div class="form-group">
                 Descrição:
-                <input type="text" name="descricao" class="form-control" maxlength="20" />
+                <input type="text" name="descricao" class="form-control" maxlength="20" value="{{descricao}}" />
             </div>
             <div class="form-group">
                 Preço Unitário:
-                <input type="text" name="preco" class="form-control" maxlength="10" />
+                <input type="text" name="preco" class="form-control" maxlength="10" value="{{preco}}" />
             </div>
             <input type="submit" value="Salvar" class="btn btn-primary" />
         </form>
     </div>
 </body>
-
-</html>
